@@ -1,0 +1,51 @@
+{
+  "paths": [
+    {
+      "name": "/blog/category",
+      "lambdaFunction": "blognextlambda",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/blog/category"
+    },
+    {
+      "name": "/blog/post",
+      "lambdaFunction": "blognextlambda",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/blog/post"
+    },
+    {
+      "name": "/blog/comment",
+      "lambdaFunction": "blognextlambda",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/blog/comment"
+    }
+  ],
+  "resourceName": "blognextapi",
+  "apiName": "blognextapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "blognextlambda"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-blognext-dev-13147-authRole",
+    "unAuthRoleName": "amplify-blognext-dev-13147-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "blognextlambda",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

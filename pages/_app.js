@@ -4,6 +4,12 @@ import Footer from '../src/components/Footer.js'
 import Top from '../src/components/Top.js'
 import Loader from '../src/components/Loader.js'
 
+import Amplify,{ API } from 'aws-amplify';
+import config from '../src/aws-exports';
+API.configure(config);
+Amplify.configure(config);
+
+
 
 function MyApp({ Component, pageProps }) {
   return(

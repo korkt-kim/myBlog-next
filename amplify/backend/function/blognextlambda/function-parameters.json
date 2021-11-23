@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "auth": {
+      "blognextadeb1390": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "commenttablenext": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "secretNames": [
+    "ACCESS_TOKEN"
+  ]
+}

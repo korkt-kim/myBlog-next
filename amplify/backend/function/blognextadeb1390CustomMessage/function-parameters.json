@@ -1,0 +1,26 @@
+{
+  "trigger": true,
+  "modules": [
+    "verification-link"
+  ],
+  "parentResource": "blognextadeb1390",
+  "functionName": "blognextadeb1390CustomMessage",
+  "resourceName": "blognextadeb1390CustomMessage",
+  "parentStack": "auth",
+  "triggerEnvs": [
+    {
+      "key": "RESOURCENAME",
+      "value": "resourceName"
+    }
+  ],
+  "triggerDir": "C:\\Users\\zakelstorm\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\CustomMessage",
+  "triggerTemplate": "CustomMessage.json.ejs",
+  "triggerEventPath": "CustomMessage.event.json",
+  "roleName": "blognextadeb1390CustomMessage",
+  "skipEdit": true,
+  "REDIRECTURL": "http://localhost:3000/welcome/",
+  "EMAILSUBJECT": "polz's blog에 오신걸 환영합니다!",
+  "EMAILMESSAGE": "polz의 블로그에 가입하신 것을 환영합니다!! 아래 링크를 클릭하세요.",
+  "RESOURCENAME": "resourceName",
+  "enableCors": false
+}

@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import styled from 'styled-components'
-import {Icon,Button} from 'semantic-ui-react'
+import {Icon} from 'semantic-ui-react'
 import { useState } from 'react'
-
 const Container = styled.div`
   position:fixed;
   padding:0 1em;
@@ -15,17 +14,21 @@ const Container = styled.div`
   align-items:center;
   background:black;
   color:white;
+  top:0;
   .header__header-item{
-    .v-btn{
+    .button{
       height:2.4rem;
-      min-height:24px;
+      min-height:2rem;
+      padding-left:1rem;
+      padding-right:1rem;
     }
-    .v-icon{
-      font-size:2.4rem;
+    .icon{
+      line-height:1;
+      vertical-align:middle !important;
+      font-size:2rem !important;
     }
   }
 `
-
 const ImageWrapper = styled.div`
   height: 2rem;
   width: 5.2rem;
@@ -41,20 +44,20 @@ const ImageWrapper = styled.div`
     }
   }
 `
-
+const AuthMenu = styled.span`
+  font-size:1rem;
+  a{
+    padding:1rem;
+  }
+`
 const NavIcon = styled(Icon)`
   cursor:pointer;
 `
-
 export default function Top(){
   const [user, setUser] = useState(null);
-
   const logout = () =>{
-
   }
-
   const toggleNav = () =>{
-
   }
   return(
     <Container>
@@ -69,16 +72,15 @@ export default function Top(){
       </Link>
       <div className="header__header-item">
         {user ? <span >
-          <span style={{marginRight:'1rem'}}>안녕하세요 {user.name} 님!</span>
-          <Button onClick={logout}>로그아웃</Button>
+          <span>안녕하세요 {user.name} 님!</span>
+          <span onClick={logout}>로그아웃</span>
         </span> : 
-        <span>
-          <Link href="/login" passHref><Button>로그인</Button></Link>
-          <Link href="/signup" passHref><Button>회원가입</Button></Link>
-        </span>
+          <AuthMenu>
+            <Link href="/login" passHref>로그인</Link>
+            <Link  ink href="/signup" passHref>회원가입</Link>
+          </AuthMenu>
         }
-        
-        <span><NavIcon onClick={toggleNav} name="bars" size='big'/></span>
+        <NavIcon onClick={toggleNav} name="bars" />
       </div>
     </Container>
   )

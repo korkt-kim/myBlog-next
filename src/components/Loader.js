@@ -34,15 +34,9 @@ export default function Loader(){
 
   useEffect(() => {
       const handleStart = (url) => {
-        console.log('start')
-        console.log(url)
-        console.log(router.asPath)
         return (url !== router.asPath) && setLoading(true)
       };
       const handleComplete = (url) => {
-        console.log('complete')
-        console.log(url)
-        console.log(router.asPath)
         return (url !== router.asPath) && setLoading(false)
       };
 

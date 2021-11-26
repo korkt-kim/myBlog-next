@@ -58,10 +58,6 @@ const NavIcon = styled(Icon)`
   cursor:pointer;
 `
 
-
-  
-
-
 export default function Top(){
   const [user, setUser] = useState(null);
   const [categories,setCategories] = useState([]);
@@ -70,7 +66,6 @@ export default function Top(){
 
   const fetchCategories = async()=>{
     const categories = await API.get('blognextapi','/blog/category');
-    console.log(categories);
     setCategories(categories);
   }
 
@@ -83,10 +78,6 @@ export default function Top(){
   }
   function toggleNav(){
     setShowNav(!showNav);
-  }
-  function RoutePageList(categoryId){
-    console.log(categoryId)
-    router.push(`/category/${categoryId}&page=1`);
   }
   
   return(
@@ -107,14 +98,14 @@ export default function Top(){
             <span onClick={logout}>로그아웃</span>
           </span> : 
             <AuthMenu>
-              <Link href="/login" passHref>로그인</Link>
+              <Link href="/signin" passHref>로그인</Link>
               <Link  ink href="/signup" passHref>회원가입</Link>
             </AuthMenu>
           }
           <NavIcon onClick={toggleNav} name="bars" />
         </div>
       </Container>
-      <Nav show={showNav} categories={categories} onClickNav={RoutePageList} onClickClose={toggleNav}></Nav>
+      <Nav show={showNav} categories={categories} onClickClose={toggleNav}></Nav>
     </section>
   )
 }

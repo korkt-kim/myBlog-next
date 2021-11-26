@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {Icon} from 'semantic-ui-react';
+import Link from 'next/link';
 const Container = styled.ul`
   z-index:100;
   overflow-x:hidden;
@@ -31,15 +32,23 @@ const CloseIcon = styled(Icon)`
   font-size:1.7rem !important;
   text-align:right !important;
 `
-export default function Nav({categories,onClickNav,onClickClose,show}){
+export default function Nav({categories,onClickClose,show}){
   return(
     <Container show={show}>
       <CloseIcon onClick={onClickClose} name="close"></CloseIcon>
       {categories.map(category=>
-        (<Item onClick={()=>onClickNav(category.id)} key={category.id}>
-            {category.name}
+        (<Link
+          key={category.id}
+          href={{
+            pathname:`/category/${category.id}`,
+            query:{'page':'1'},
+          }}
+          passHref
+        > 
+          <Item >
+            <a>{category.name}</a>
           </Item>
-        )
+        </Link>)
       )}
     </Container>
   )

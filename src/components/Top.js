@@ -7,6 +7,9 @@ import {API} from 'aws-amplify'
 import Nav from './Nav.js';
 import { useRouter } from 'next/router'
 
+import { useDispatch,useSelector } from 'react-redux'
+import {checkUser,signout} from '../../store/modules/auth'
+
 const Container = styled.div`
   position:fixed;
   padding:0 1em;
@@ -59,7 +62,9 @@ const NavIcon = styled(Icon)`
 `
 
 export default function Top(){
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch()
+  const {user,loading,hasError} = useSelector(state=>state.auth)
+
   const [categories,setCategories] = useState([]);
   const [showNav,setShowNav] = useState(false);
   const router = useRouter();
@@ -71,11 +76,10 @@ export default function Top(){
 
   useEffect(() => {
     fetchCategories();
+    dispatch(checkUser());
   }, [])
 
-  function logout (){
   
-  }
   function toggleNav(){
     setShowNav(!showNav);
   }
@@ -94,8 +98,11 @@ export default function Top(){
         </Link>
         <div className="header__header-item">
           {user ? <span >
-            <span>안녕하세요 {user.name} 님!</span>
-            <span onClick={logout}>로그아웃</span>
+            <span>안녕하세요 {user.attributes?.name} 님!</span>
+            <a onClick={(e)=> {
+              e.preventDefault();
+              dispatch(signout())
+            }}>로그아웃</a>
           </span> : 
             <AuthMenu>
               <Link href="/signin" passHref>로그인</Link>

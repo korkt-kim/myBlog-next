@@ -4,6 +4,8 @@ import Footer from '../src/components/Footer.js'
 import Top from '../src/components/Top.js'
 import Loader from '../src/components/Loader.js'
 
+import { wrapper } from "../store";
+
 import Amplify,{ API } from 'aws-amplify';
 import config from '../src/aws-exports';
 API.configure(config);
@@ -22,4 +24,4 @@ function MyApp({ Component, pageProps }) {
   ) 
 }
  
-export default MyApp
+export default wrapper.withRedux(MyApp);

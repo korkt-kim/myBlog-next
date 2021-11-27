@@ -1,10 +1,5 @@
 {
   "function": {
-    "blognextadeb1390CustomMessage": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "blognextlambda": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -12,7 +7,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "blognextadeb1390",
+          "resourceName": "blognext33e1954f",
           "attributes": [
             "UserPoolId"
           ]
@@ -27,16 +22,21 @@
           ]
         }
       ]
+    },
+    "blognext33e1954fCustomMessage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "auth": {
-    "blognextadeb1390": {
+    "blognext33e1954f": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "blognextadeb1390CustomMessage",
+          "resourceName": "blognext33e1954fCustomMessage",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",

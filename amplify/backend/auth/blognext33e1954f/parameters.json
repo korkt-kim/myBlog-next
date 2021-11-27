@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "blognextadeb1390_identitypool_adeb1390",
+    "identityPoolName": "blognext33e1954f_identitypool_33e1954f",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "blogneadeb1390",
-    "userPoolName": "blognextadeb1390_userpool_adeb1390",
+    "resourceNameTruncated": "blogne33e1954f",
+    "userPoolName": "blognext33e1954f_userpool_33e1954f",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -30,10 +30,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "blogneadeb1390_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "blogne33e1954f_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "adeb1390",
-    "resourceName": "blognextadeb1390",
+    "sharedId": "33e1954f",
+    "resourceName": "blognext33e1954f",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -61,18 +61,18 @@
     "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/callback/\"],\"LogoutURLs\":[\"http://localhost:3000/logout/\"]}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
-    "verificationBucketName": "blognextadeb1390verificationbucket",
+    "verificationBucketName": "blognext33e1954fverificationbucket",
     "usernameCaseSensitive": false,
     "parentStack": {
         "Ref": "AWS::StackId"
     },
-    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"CustomMessage\",\n    \"lambdaFunctionName\": \"blognextadeb1390CustomMessage\"\n  }\n]",
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"CustomMessage\",\n    \"lambdaFunctionName\": \"blognext33e1954fCustomMessage\"\n  }\n]",
     "breakCircularDependency": true,
     "permissions": [],
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "blognextadeb1390CustomMessage",
+            "resourceName": "blognext33e1954fCustomMessage",
             "triggerProvider": "Cognito",
             "attributes": [
                 "Arn",

@@ -75,12 +75,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "blognextadeb1390CustomMessage",
+            "blognext33e1954fCustomMessage",
             {
               "Fn::Join": [
                 "",
                 [
-                  "blognextadeb1390CustomMessage",
+                  "blognext33e1954fCustomMessage",
                   "-",
                   {
                     "Ref": "env"
@@ -139,12 +139,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "blognextadeb1390CustomMessage",
+            "blognext33e1954fCustomMessage",
             {
               "Fn::Join": [
                 "",
                 [
-                  "blognextadeb1390CustomMessage",
+                  "blognext33e1954fCustomMessage",
                   "-",
                   {
                     "Ref": "env"

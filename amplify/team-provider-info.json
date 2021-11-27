@@ -13,21 +13,21 @@
     },
     "categories": {
       "function": {
-        "blognextadeb1390CustomMessage": {
+        "blognextlambda": {
+          "secretsPathAmplifyAppId": "d1xljqlkvmcbtn",
+          "deploymentBucketName": "amplify-blognext-dev-13147-deployment",
+          "s3Key": "amplify-builds/blognextlambda-4d7a374d55726b617064-build.zip"
+        },
+        "blognext33e1954fCustomMessage": {
           "REDIRECTURL": "http://localhost:3000/welcome/",
           "EMAILSUBJECT": "polz's blog에 오신걸 환영합니다!",
           "EMAILMESSAGE": "polz의 블로그에 가입하신 것을 환영합니다!! 아래 링크를 클릭하세요.",
           "deploymentBucketName": "amplify-blognext-dev-13147-deployment",
-          "s3Key": "amplify-builds/blognextadeb1390CustomMessage-336b2f6970756b2f3571-build.zip"
-        },
-        "blognextlambda": {
-          "secretsPathAmplifyAppId": "d1xljqlkvmcbtn",
-          "deploymentBucketName": "amplify-blognext-dev-13147-deployment",
-          "s3Key": "amplify-builds/blognextlambda-63723856494f54654e7a-build.zip"
+          "s3Key": "amplify-builds/blognext33e1954fCustomMessage-64754f486d3930633230-build.zip"
         }
       },
       "auth": {
-        "blognextadeb1390": {}
+        "blognext33e1954f": {}
       }
     }
   }

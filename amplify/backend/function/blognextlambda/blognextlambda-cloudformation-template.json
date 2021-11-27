@@ -16,10 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "authblognextadeb1390UserPoolId": {
-      "Type": "String",
-      "Default": "authblognextadeb1390UserPoolId"
-    },
     "storagecommenttablenextName": {
       "Type": "String",
       "Default": "storagecommenttablenextName"
@@ -34,6 +30,10 @@
     },
     "secretsPathAmplifyAppId": {
       "Type": "String"
+    },
+    "authblognext33e1954fUserPoolId": {
+      "Type": "String",
+      "Default": "authblognext33e1954fUserPoolId"
     }
   },
   "Conditions": {
@@ -89,9 +89,6 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "AUTH_BLOGNEXTADEB1390_USERPOOLID": {
-              "Ref": "authblognextadeb1390UserPoolId"
-            },
             "STORAGE_COMMENTTABLENEXT_NAME": {
               "Ref": "storagecommenttablenextName"
             },
@@ -122,6 +119,9 @@
                   "ACCESS_TOKEN"
                 ]
               ]
+            },
+            "AUTH_BLOGNEXT33E1954F_USERPOOLID": {
+              "Ref": "authblognext33e1954fUserPoolId"
             }
           }
         },
@@ -333,7 +333,7 @@
                       },
                       ":userpool/",
                       {
-                        "Ref": "authblognextadeb1390UserPoolId"
+                        "Ref": "authblognext33e1954fUserPoolId"
                       }
                     ]
                   ]

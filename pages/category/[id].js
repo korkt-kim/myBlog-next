@@ -42,8 +42,10 @@ export default function PostList(){
     })
   }
 
-  const openPostDetail = () =>{
-    console.log('clickitem')
+  const routePostDetail = (postId) =>{
+    router.push({
+      pathname:`/post/${postId}`,
+    })
   }
 
   return(
@@ -55,8 +57,8 @@ export default function PostList(){
         items={posts}
         totalCount={totalCount}
         currentPage={currentPage}
-        onMovePagination={routeNewPage}
-        onClickItem={openPostDetail}/>)}
+        onClickPagination={routeNewPage}
+        onClickItem={routePostDetail}/>)}
       
     </Container>
   )

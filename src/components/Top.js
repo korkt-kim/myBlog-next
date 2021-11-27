@@ -5,10 +5,9 @@ import {Icon} from 'semantic-ui-react'
 import { useState,useEffect } from 'react'
 import {API} from 'aws-amplify'
 import Nav from './Nav.js';
-import { useRouter } from 'next/router'
 
 import { useDispatch,useSelector } from 'react-redux'
-import {checkUser,signout} from '../../store/modules/auth'
+import {signout} from '../../store/modules/auth'
 
 const Container = styled.div`
   position:fixed;
@@ -62,12 +61,10 @@ const NavIcon = styled(Icon)`
 `
 
 export default function Top(){
-  const dispatch = useDispatch()
-  const {user,loading,hasError} = useSelector(state=>state.auth)
-
+  const dispatch = useDispatch();
+  const {user} = useSelector((state)=>state.auth);
   const [categories,setCategories] = useState([]);
   const [showNav,setShowNav] = useState(false);
-  const router = useRouter();
 
   const fetchCategories = async()=>{
     const categories = await API.get('blognextapi','/blog/category');
@@ -76,7 +73,6 @@ export default function Top(){
 
   useEffect(() => {
     fetchCategories();
-    dispatch(checkUser());
   }, [])
 
   

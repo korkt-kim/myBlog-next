@@ -8,6 +8,7 @@ import { wrapper } from "../store";
 
 import Amplify,{ API } from 'aws-amplify';
 import config from '../src/aws-exports';
+import AuthProvider from '../src/provider/AuthProvider'
 API.configure(config);
 Amplify.configure(config);
 
@@ -16,10 +17,12 @@ Amplify.configure(config);
 function MyApp({ Component, pageProps }) {
   return(
     <div>
-      <Loader></Loader>
-      <Top></Top>
-      <Component {...pageProps} />
-      <Footer ></Footer>
+      <AuthProvider>
+        <Loader></Loader>
+        <Top></Top>
+        <Component {...pageProps} />
+        <Footer ></Footer>
+      </AuthProvider>
     </div>
   ) 
 }

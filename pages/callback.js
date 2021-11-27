@@ -11,7 +11,7 @@ export default function Callback(){
   useEffect(() => {
     setTimeout(()=>{
       router.push('/');
-    },500);
+    },2000);
   }, [])
   return(
     <Container>

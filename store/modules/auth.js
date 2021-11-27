@@ -1,5 +1,7 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit';
 import {Auth} from 'aws-amplify';
+import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth/lib/types'
+import {Auth as asdf} from '@aws-amplify/auth'
 
 const initialState = {
   user:null,
@@ -20,7 +22,7 @@ export const cognitoLogin = createAsyncThunk('auth/cognitoLogin',async (userData
 
 export const googleLogin = createAsyncThunk('auth/googleLogin',async(_,{rejectWithValue})=>{
   try{
-    const user = await Auth.federatedSignIn({provider:'Google'});
+    await asdf.federatedSignIn({provider:CognitoHostedUIIdentityProvider.Google});
     return user;
   }catch(e){
     return rejectWithValue(e.message);
@@ -85,7 +87,6 @@ const authSlice = createSlice({
       state.hasError=payload;
     },
     [googleLogin.fulfilled]: (state,{payload})=>{
-      state.user=payload;
       state.loading=false;
       state.hasError=false;
     },

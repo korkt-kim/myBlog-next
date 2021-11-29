@@ -38,6 +38,15 @@ const Container = styled.div`
       .comment__list__header__date{
         font-size:0.8rem;
       }
+      .comment__list__header__func{
+        margin-left:2rem;
+        cursor:pointer;
+        color:grey;
+        &:hover{
+          color:black;
+          text-decoration:underline;
+        }
+      }
     } 
   }
   .comment-input{
@@ -65,10 +74,14 @@ const Container = styled.div`
 
 export default function Comment({postId}){
   const {user} = useSelector((state)=>state.auth);
+  const [refresh,setRefresh] = useState(0);
   const [comments,setComments] = useState([]);
   const [commentInput, setCommentInput] = useState('');
   const placeholder = useMemo(() => user ? '' : `Please login to comment`, [user])
   
+  const showCommentFunc = (commentUserSub)=>{
+    return commentUserSub==user?.attributes?.sub
+  }
   const fetchComments=async ()=>{
     const headers={
       headers:{
@@ -93,34 +106,50 @@ export default function Comment({postId}){
     };
     
     try{
-      await API.post('blognextapi','/blog/comment',request)
+      await API.post('blognextapi','/blog/comment',request);
+      setRefresh(refresh+1)
     }catch(e){
       console.error(e);
       alert(e.message);
     } 
   }
 
-  // const deleteComment = async () =>{
-  //   await API.delete()
-  // }
+  const deleteComment = async (commentId) =>{
+    const request = {
+      headers:{
+        "Authorization": `Bearer ${user?.signInUserSession?.idToken?.jwtToken}`
+      }
+    };
+    try{
+      await API.del('blognextapi',`/blog/comment?id=${commentId}`,request);
+      setRefresh(refresh+1)
+    }catch(e){
+      console.error(e);
+      alert(e.message);
+    }
+  }
 
   useEffect(()=>{
+    setCommentInput('');
     fetchComments();
-  },[comments.join('')])
+  },[refresh])
 
   return(
     <Container>
       <div className="comment__title">Comment</div>
       {comments.map((comment,index)=>
-        (<div className="comment__list"  key={index}>
+        (<div className="comment__list"  key={comment.id}>
           <div className="comment__list__header"><span className="comment__list__header__user">{comment.userName}</span>
             <span className="comment__list__header__date">{new Date(comment.updatedAt).toLocaleString()}</span>
+            {showCommentFunc(comment.userSub) && <span className="comment__list__header__func" onClick={()=>deleteComment(comment.id)}>
+              <small>Del</small>
+            </span>}
           </div>
           <div className="comment__list__content">{comment.comment}</div>
         </div>)
       )}
         
-      <textarea className="comment-input" onChange={(e)=>setCommentInput(e.target.value)} placeholder={placeholder}></textarea>
+      <textarea className="comment-input" onChange={(e)=>setCommentInput(e.target.value)} value={commentInput} placeholder={placeholder}></textarea>
       <div className="comment-register" onClick={(e)=>{
         e.preventDefault();
         registerComment(commentInput);

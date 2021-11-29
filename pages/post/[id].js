@@ -3,9 +3,11 @@ import {useRouter} from 'next/router';
 import {API} from 'aws-amplify';
 import { Loader } from 'semantic-ui-react';
 import styled from 'styled-components';
+import Comment from '../../src/components/Comment'
 
 const Container = styled.div`
-  padding-top:55px;
+  padding-top:70px;
+  padding-bottom:55px;
   display:flex;
   align-items: center;
   flex-direction:column;
@@ -116,6 +118,7 @@ export default function Post(){
             <div className="post">
               <div className="post__content" dangerouslySetInnerHTML={{__html:content}}></div>
             </div>
+            <Comment postId={postId}></Comment>
           </Container>
         )
       }

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import {Icon} from 'semantic-ui-react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 const Container = styled.ul`
   z-index:100;
   overflow-x:hidden;
@@ -24,6 +26,7 @@ const Item = styled.li`
     background:rgb(70,70,70);
   }
   padding: 1rem 5rem 1rem 1rem;
+  background:${props=>props.isActive ? 'rgb(70,70,70)' : 'transparent'};
 `
 const CloseIcon = styled(Icon)`
   cursor:pointer;
@@ -33,6 +36,18 @@ const CloseIcon = styled(Icon)`
   text-align:right !important;
 `
 export default function Nav({categories,onClickClose,show}){
+  const router = useRouter();
+ 
+  const isActive = (id) => {
+    switch(router.pathname){
+      case '/post/[id]':
+        return id == router.query.categoryId
+      case '/category/[id]':
+        return id==router.query.id
+      default:
+        return false;
+    }
+  }
   return(
     <Container show={show}>
       <CloseIcon onClick={onClickClose} name="close"></CloseIcon>
@@ -45,7 +60,7 @@ export default function Nav({categories,onClickClose,show}){
           }}
           passHref
         > 
-          <Item >
+          <Item isActive={isActive(category.id)}>
             <a>{category.name}</a>
           </Item>
         </Link>)

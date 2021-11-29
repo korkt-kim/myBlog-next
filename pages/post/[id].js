@@ -1,9 +1,10 @@
-import {useState,useEffect} from 'react';
+//serverside rendering
+
 import {useRouter} from 'next/router';
 import {API} from 'aws-amplify';
-import { Loader } from 'semantic-ui-react';
 import styled from 'styled-components';
 import Comment from '../../src/components/Comment'
+import Head from 'next/head'
 
 const Container = styled.div`
   padding-top:70px;
@@ -85,44 +86,34 @@ const Container = styled.div`
 `
 
 
-export default function Post(){
-  const router = useRouter();
-  const [title,setTitle] = useState('');
-  const [content,setContent] = useState('');
-  const [date,setDate] = useState('');
-  const [isLoading,setIsLoading] = useState(true);
-  const {id:postId} = router.query
-  
-  const fetchPostDetail = async (postId) =>{
-    setIsLoading(true)
-    const {title,content,categoryId,date} = await API.get('blognextapi',`/blog/post/${postId}`)
-    setTitle(title);
-    setContent(content);
-    setDate(date);
-    setIsLoading(false)
-  }
-
-  useEffect(()=>{
-    if(!router.query.id) return;
-    fetchPostDetail(postId);
-  },[router.query.id])
+export default function Post({title,content,date}){
+	const router = useRouter();
+	const {id:postId} = router.query;
+	
   return(
-    <>
-      {isLoading ? (
-        <div style={{padding:"300px 0"}}>
-          <Loader inline="centered" active>Loading</Loader>
-        </div>):
-        (
-          <Container>
-            <h1 className="title">{title}</h1>
-            <div className="post">
-              <div className="post__content" dangerouslySetInnerHTML={{__html:content}}></div>
-            </div>
-            <Comment postId={postId}></Comment>
-          </Container>
-        )
-      }
-    </>
-    
+		<>
+			<Head>
+				<title>{title}</title>
+			</Head>
+			<Container>
+				<h1 className="title">{title}</h1>
+				<div className="post">
+					<div className="post__content" dangerouslySetInnerHTML={{__html:content}}></div>
+				</div>
+				<Comment postId={postId}></Comment>
+			</Container>
+		</>
   )
+}
+
+export async function getServerSideProps(context){ // context: params,요청,응답 query 
+	const postId = context.params.id;
+	const {title,content,categoryId,date} = await API.get('blognextapi',`/blog/post/${postId}`)
+	return{
+		props:{
+			title,
+			content,
+			date
+		}
+	}
 }

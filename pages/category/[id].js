@@ -45,7 +45,8 @@ export default function PostList(){
   const routePostDetail = (postId) =>{
     router.push({
       pathname:`/post/${postId}`,
-    })
+      query:{categoryId}
+    },`/post/${postId}`)
   }
 
   return(

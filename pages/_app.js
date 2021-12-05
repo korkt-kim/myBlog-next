@@ -9,22 +9,29 @@ import { wrapper } from "../store";
 import Amplify,{ API } from 'aws-amplify';
 import config from '../src/aws-exports';
 import AuthProvider from '../src/provider/AuthProvider'
+
 API.configure(config);
 Amplify.configure(config);
 
 
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps,categories }) {
   return(
     <div>
       <AuthProvider>
-        <Loader></Loader>
-        <Top></Top>
-        <Component {...pageProps} />
-        <Footer ></Footer>
+          <Loader></Loader>
+          <Top categories={categories}></Top>
+          <Component {...pageProps} />
+          <Footer ></Footer>
       </AuthProvider>
     </div>
   ) 
 }
  
+
+MyApp.getInitialProps = async () => {
+  const categories = await API.get('blognextapi','/blog/category');
+  return {categories}
+}
+
 export default wrapper.withRedux(MyApp);

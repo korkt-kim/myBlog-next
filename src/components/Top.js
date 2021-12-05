@@ -7,6 +7,7 @@ import {API} from 'aws-amplify'
 import Nav from './Nav.js';
 
 import { useDispatch,useSelector } from 'react-redux'
+import {setCategories} from '../../store/modules/blog'
 import {signout} from '../../store/modules/auth'
 
 const Container = styled.div`
@@ -60,22 +61,15 @@ const NavIcon = styled(Icon)`
   cursor:pointer;
 `
 
-export default function Top(){
+export default function Top({categories}){
   const dispatch = useDispatch();
   const {user} = useSelector((state)=>state.auth);
-  const [categories,setCategories] = useState([]);
   const [showNav,setShowNav] = useState(false);
 
-  const fetchCategories = async()=>{
-    const categories = await API.get('blognextapi','/blog/category');
-    setCategories(categories);
-  }
+  useEffect(()=>{
+    dispatch(setCategories({categories}));
+  },[])
 
-  useEffect(() => {
-    fetchCategories();
-  }, [])
-
-  
   function toggleNav(){
     setShowNav(!showNav);
   }

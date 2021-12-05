@@ -1,6 +1,7 @@
 import { useEffect,useState,useMemo } from 'react';
 import styled from 'styled-components';
 import SimpleTable from '../../src/components/SimpleTable';
+import { useSelector } from 'react-redux';
 import {API} from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { Loader } from 'semantic-ui-react';
@@ -18,9 +19,11 @@ const Container = styled.div`
 export default function PostList(){
   const router = useRouter();
   const [posts,setPosts] = useState([]);
+  const {categories} = useSelector((state=>state.blog))
   const [totalCount,setTotalCount] = useState(0);
   const {id:categoryId,page:currentPage} = router.query;
   const [isLoading ,setIsLoading] = useState(true);
+  const title = useMemo(()=>categories.find(category=>category.id==categoryId)?.name,[categories,categoryId]);
 
   const fetchPostList = async (categoryId,page)=>{
     setIsLoading(true);
@@ -51,7 +54,7 @@ export default function PostList(){
 
   return(
     <Container>
-      <h1 className="title"></h1>
+      <h1 className="title">{title}</h1>
       {isLoading ? (<div style={{padding:"300px 0"}}>
         <Loader inline="centered" active>Loading</Loader>
       </div>):(<SimpleTable 

@@ -49,14 +49,13 @@ export default function Nav({categories,onClickClose,show}){
     }
   }
   return(
-    <Container show={show}>
+    <Container show={show || false}>
       <CloseIcon onClick={onClickClose} name="close"></CloseIcon>
       {categories.map(category=>
         (<Link
           key={category.id}
           href={{
-            pathname:`/category/${category.id}`,
-            query:{'page':'1'},
+            pathname:`/category/${category.id}/1`,
           }}
           passHref
         > 

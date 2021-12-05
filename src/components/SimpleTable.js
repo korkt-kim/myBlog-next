@@ -42,7 +42,7 @@ const Pagination = styled.div`
     }
   } 
 `
-export default function SimpleTable({items,totalCount,currentPage,onClickPagination,onClickItem}){
+export default function SimpleTable({items=[],totalCount,currentPage,onClickPagination,onClickItem}){
   const lastPaginationIndex = useMemo(()=>{
     const limit = Math.floor((totalCount-1)/PAGE_SIZE)+1;
     return Math.min(limit,(Math.floor((currentPage-1)/PAGE_SIZE))*PAGE_SIZE+PAGE_SIZE);

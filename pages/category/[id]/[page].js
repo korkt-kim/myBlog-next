@@ -1,10 +1,9 @@
 import { useEffect,useState,useMemo } from 'react';
 import styled from 'styled-components';
-import SimpleTable from '../../src/components/SimpleTable';
+import SimpleTable from '../../../src/components/SimpleTable';
 import { useSelector } from 'react-redux';
 import {API} from 'aws-amplify';
 import { useRouter } from 'next/router';
-import { Loader } from 'semantic-ui-react';
 
 const Container = styled.div`
   padding-top:55px;
@@ -16,32 +15,15 @@ const Container = styled.div`
   }
 `
 
-export default function PostList(){
+export default function PostList({posts,totalCount}){
   const router = useRouter();
-  const [posts,setPosts] = useState([]);
   const {categories} = useSelector((state=>state.blog))
-  const [totalCount,setTotalCount] = useState(0);
   const {id:categoryId,page:currentPage} = router.query;
-  const [isLoading ,setIsLoading] = useState(true);
   const title = useMemo(()=>categories.find(category=>category.id==categoryId)?.name,[categories,categoryId]);
-
-  const fetchPostList = async (categoryId,page)=>{
-    setIsLoading(true);
-    const {posts,totalCount} = await API.get('blognextapi',`/blog/post?categoryId=${categoryId}&page=${page}`);
-    setPosts(posts);
-    setTotalCount(totalCount);
-    setIsLoading(false);
-  }
-
-  useEffect(()=>{
-    if(!router.query.id || !router.query.page) return; 
-    fetchPostList(categoryId,currentPage); 
-  },[router.query.id,router.query.page])
   
   const routeNewPage = (page) =>{
     router.push({
-      pathname:`/category/${categoryId}`,
-      query:{page}
+      pathname:`/category/${categoryId}/${page}`,
     })
   }
 
@@ -55,16 +37,33 @@ export default function PostList(){
   return(
     <Container>
       <h1 className="title">{title}</h1>
-      {isLoading ? (<div style={{padding:"300px 0"}}>
-        <Loader inline="centered" active>Loading</Loader>
-      </div>):(<SimpleTable 
+      <SimpleTable 
         items={posts}
         totalCount={totalCount}
         currentPage={currentPage}
         onClickPagination={routeNewPage}
-        onClickItem={routePostDetail}/>)}
+        onClickItem={routePostDetail}/>
       
     </Container>
   )
+}
+
+export async function getStaticPaths(){
+  return{
+    paths:[],
+    fallback:true,  // fallback이 false면 없는 페이지 대응 X. true면 없는 페이지에 대해서는 첫동작은 serverside rendering처럼 작동한다. 하지만 캐싱하여 뒤부터는 빠르다.
+  }
+}
+
+export async function getStaticProps(context){
+  const categoryId = context.params.id;
+  const page = context.params.page;
+  const {posts,totalCount} = await API.get('blognextapi',`/blog/post?categoryId=${categoryId}&page=${page}`);
+  return{
+    props:{
+      posts,
+      totalCount,
+    }
+  }
 }
   

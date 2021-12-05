@@ -1,7 +1,7 @@
 //serverside rendering
 
 import {useRouter} from 'next/router';
-import {API} from 'aws-amplify';
+import {API,withSSRContext} from 'aws-amplify';
 import styled from 'styled-components';
 import Comment from '../../src/components/Comment'
 import Head from 'next/head'
@@ -106,9 +106,17 @@ export default function Post({title,content,date}){
   )
 }
 
-export async function getServerSideProps(context){ // context: params,요청,응답 query 
-	const postId = context.params.id;
-	const {title,content,categoryId,date} = await API.get('blognextapi',`/blog/post/${postId}`)
+export async function getStaticPaths(){
+	return{
+		paths:[],
+		fallback:'blocking',
+	}
+}
+
+export async function getStaticProps({req,params}){ // context: params,요청,응답 query 
+	const {API} = withSSRContext({ req })
+	const postId = params.id;
+	const {title,content,date} = await API.get('blognextapi',`/blog/post/${postId}`)
 	return{
 		props:{
 			title,

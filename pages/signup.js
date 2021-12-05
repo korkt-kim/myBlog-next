@@ -91,3 +91,9 @@ export default function SignUp(){
     </Container>
   )
 }
+
+export async function getStaticProps(){
+  return{
+    props:{}
+  }
+}

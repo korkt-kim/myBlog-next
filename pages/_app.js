@@ -11,7 +11,7 @@ import config from '../src/aws-exports';
 import AuthProvider from '../src/provider/AuthProvider'
 
 API.configure(config);
-Amplify.configure(config);
+Amplify.configure({...config, ssr: true});
 
 
 

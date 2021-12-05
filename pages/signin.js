@@ -88,3 +88,9 @@ export default function SignIn(){
     </Container>
   )
 }
+
+export async function getStaticProps(){
+  return{
+    props:{}
+  }
+}

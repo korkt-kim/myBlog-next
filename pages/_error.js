@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 const Container = styled.p`
   padding:200px 0;
+  text-align: center;
+  font-size: 1.5rem;
 `
 //customizing 500 eror page
  function Error({
